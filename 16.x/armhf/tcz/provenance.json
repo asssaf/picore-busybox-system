@@ -1,0 +1,1207 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "name": "busybox-system.tcz",
+      "digest": {
+        "sha256": "f0d1779bc8db597d7c27588fa22ee93d578fdefeeb7f5e0fff3954c248873a7c"
+      }
+    },
+    {
+      "name": "busybox-system.tcz.list",
+      "digest": {
+        "sha256": "c9e6fdf7f697f65df7216be700a3a96a7254d1b2d2a14139b3ba60ddc0b77894"
+      }
+    },
+    {
+      "name": "busybox-system.tcz.md5.txt",
+      "digest": {
+        "sha256": "56868b061858870aa6bf1b19865cf09449de3296b5b887faebd97cb3b95bbae5"
+      }
+    }
+  ],
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/asssaf/picore-busybox-system/actions/runs/16922014935/attempts/1"
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/docker/dockerfile-upstream@master",
+        "digest": {
+          "sha256": "f5a082f18319877993d070adf5a206e14edc36245caa6955e61d71f95eedbeae"
+        }
+      },
+      {
+        "uri": "pkg:docker/debian@stable?platform=linux%2Famd64",
+        "digest": {
+          "sha256": "e9f62364e0cfd9269cbc422be431ac496e22c98c5401ddf03701638a280b398d"
+        }
+      },
+      {
+        "uri": "https://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+        "digest": {
+          "sha1": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "uri": "https://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+        "digest": {
+          "sha1": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f"
+        },
+        "entryPoint": "docker/Dockerfile"
+      },
+      "parameters": {
+        "frontend": "gateway.v0",
+        "args": {
+          "build-arg:ARCH": "armhf",
+          "build-arg:TCZ": "busybox-system.tcz",
+          "cmdline": "docker/dockerfile-upstream:master",
+          "label:org.opencontainers.image.created": "2025-08-12T22:06:14.757Z",
+          "label:org.opencontainers.image.description": "",
+          "label:org.opencontainers.image.licenses": "",
+          "label:org.opencontainers.image.revision": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+          "label:org.opencontainers.image.source": "https://github.com/asssaf/picore-busybox-system",
+          "label:org.opencontainers.image.title": "picore-busybox-system",
+          "label:org.opencontainers.image.url": "https://github.com/asssaf/picore-busybox-system",
+          "label:org.opencontainers.image.version": "latest",
+          "source": "docker/dockerfile-upstream:master",
+          "target": "export"
+        },
+        "secrets": [
+          {
+            "id": "GIT_AUTH_HEADER",
+            "optional": true
+          },
+          {
+            "id": "GIT_AUTH_TOKEN",
+            "optional": true
+          }
+        ]
+      },
+      "environment": {
+        "platform": "linux/amd64"
+      }
+    },
+    "buildConfig": {
+      "llbDefinition": [
+        {
+          "id": "step0",
+          "op": {
+            "Op": {
+              "source": {
+                "identifier": "docker-image://docker.io/library/debian:stable@sha256:e9f62364e0cfd9269cbc422be431ac496e22c98c5401ddf03701638a280b398d"
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          }
+        },
+        {
+          "id": "step1",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "apt-get update         \u0026\u0026 apt-get install -y build-essential crossbuild-essential-${ARCH} squashfs-tools curl         \u0026\u0026 apt-get clean"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step0:0"
+          ]
+        },
+        {
+          "id": "step2",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "mkdir /work"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step1:0"
+          ]
+        },
+        {
+          "id": "step3",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": -1,
+                    "output": 0,
+                    "Action": {
+                      "mkdir": {
+                        "path": "/work",
+                        "mode": 493,
+                        "makeParents": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step2:0"
+          ]
+        },
+        {
+          "id": "step4",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "curl -sLo - \"https://busybox.net/downloads/busybox-${BUSYBOX_VERSION}.tar.bz2\" | tar xvj"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/work",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step3:0"
+          ]
+        },
+        {
+          "id": "step5",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": -1,
+                    "output": 0,
+                    "Action": {
+                      "mkdir": {
+                        "path": "/work/busybox-1.36.1",
+                        "mode": 493,
+                        "makeParents": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step4:0"
+          ]
+        },
+        {
+          "id": "step6",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make allnoconfig"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step5:0"
+          ]
+        },
+        {
+          "id": "step7",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "(         for F in ${ENABLE_FEATURES};         do                 sed -i \"s/^.*# CONFIG_${F} is not set.*$/CONFIG_${F}=y/\" .config ;         done; )"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step6:0"
+          ]
+        },
+        {
+          "id": "step8",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "(         for F in ${DISABLE_FEATURES};         do                 sed -i \"s/^CONFIG_${F}=y$/# CONFIG_${F} is not set/\" .config ;         done; )"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step7:0"
+          ]
+        },
+        {
+          "id": "step9",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make oldconfig"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step8:0"
+          ]
+        },
+        {
+          "id": "step10",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make CROSS_COMPILE=$CC CC=\"${CC}gcc -Os -pipe\" CXX=\"${CC}g++ -Os -pipe -fno-exceptions -fno-rtti\" CONFIG_PREFIX=extension/usr/local busybox install"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step9:0"
+          ]
+        },
+        {
+          "id": "step11",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "rm extension/usr/local/bin/busybox"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step10:0"
+          ]
+        },
+        {
+          "id": "step12",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "mksquashfs extension /${TCZ} -all-root -noappend"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step11:0"
+          ]
+        },
+        {
+          "id": "step13",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "unsquashfs -lc ${TCZ} | sed 's|^squashfs-root/||' \u003e ${TCZ}.list"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step12:0"
+          ]
+        },
+        {
+          "id": "step14",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "md5sum ${TCZ} \u003e ${TCZ}.md5.txt"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=armhf",
+                    "CC=arm-linux-gnueabihf-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step13:0"
+          ]
+        },
+        {
+          "id": "step15",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": -1,
+                    "secondaryInput": 0,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step16",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": 1,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz.list",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step15:0",
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step17",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": 1,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz.md5.txt",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step16:0",
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step18",
+          "op": {
+            "Op": {}
+          },
+          "inputs": [
+            "step17:0"
+          ]
+        }
+      ],
+      "digestMapping": {
+        "sha256:055b9b81cae66cd29fa6104fc04ed9fcb7d3d304309096f619d3b228a0f6c20f": "step8",
+        "sha256:115dd03c476208c94cbca8571c2f2e74aeb10a9b2652e5cde9aa6b192dc633bd": "step15",
+        "sha256:1c8f334aa2ad46ce2e8664cce655278f3a3b08cd54b585e10e734cb0c54842ec": "step11",
+        "sha256:23561fb2097c72ed926b0808dc31fbc64481b27eb17c140103d909f7324389ee": "step1",
+        "sha256:4f56fbdee9e1888f49df5f43e38e79e1d3b74883c8d7d18978f6ee43337352cb": "step6",
+        "sha256:54c235dee87a639038f5e6cf49fabf8461d557383842c1b1bb8f83c4a67e5142": "step12",
+        "sha256:5d80e897b9a133c7d8f262e8be3d0983cead01dfd04ae35e85b0e446e8113049": "step7",
+        "sha256:6b9819bc1c38e23653cefadfeee2e1daf60630a4eb014e4237596be3bad0cb9c": "step14",
+        "sha256:89aa9c62d8b649798bb5a4fbf0b72ab118caf5725c9fb2a658e3ab68363e614d": "step9",
+        "sha256:a983489911259b79de01032a17bb42cd88d1e0eefb50a8bf16e469b46085d993": "step10",
+        "sha256:aa7cd2ac72bcf296adb3b62ccf9d216e1c78f56eaeee267c5da1ac1cafc837d8": "step2",
+        "sha256:b65b3db74f8defbd733c850e06ff334bb9e0067912e7cbd20ddb7e76eeff1a59": "step18",
+        "sha256:c0e18c89edeb4fcf1fe0f82509c15a0e58250873d3266feb1352033594f3408a": "step4",
+        "sha256:c2b251d4b82f0b518d64d2ad01784c7bd1e19567ca330291df1fdab758d47457": "step3",
+        "sha256:d57d9b36707d1a6a7eafa1d2ad10f274a6cf1c9fc70ae517a4126c16d04e0898": "step16",
+        "sha256:e138ed36a60633474338685d51af0eaa312972fb26bc21cd3292664b2f5e6f92": "step17",
+        "sha256:e92cb640eb6c7d8599741c3c93e90fe666051d0ca50dc30744ad0036701d2f08": "step5",
+        "sha256:ee95f3b329ed80b9eefb23eb3f4896963f8bc60fce7969ad3a0d676995acdd61": "step0",
+        "sha256:f162fb96940a0fd2384eb23deffed475e16eef2a83cf878b6f1b2af2c0449c58": "step13"
+      }
+    },
+    "metadata": {
+      "buildInvocationID": "tb22viz3210lf7eixo883q4gm",
+      "buildStartedOn": "2025-08-12T22:06:15.643905324Z",
+      "buildFinishedOn": "2025-08-12T22:07:16.423412199Z",
+      "completeness": {
+        "parameters": true,
+        "environment": true,
+        "materials": true
+      },
+      "reproducible": false,
+      "https://mobyproject.org/buildkit@v1#metadata": {
+        "source": {
+          "locations": {
+            "step0": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 2
+                      },
+                      "end": {
+                        "line": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step1": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 6
+                      },
+                      "end": {
+                        "line": 6
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 7
+                      },
+                      "end": {
+                        "line": 7
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 8
+                      },
+                      "end": {
+                        "line": 8
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step10": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 42
+                      },
+                      "end": {
+                        "line": 42
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step11": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 43
+                      },
+                      "end": {
+                        "line": 43
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step12": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 46
+                      },
+                      "end": {
+                        "line": 46
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step13": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 49
+                      },
+                      "end": {
+                        "line": 49
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step14": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 50
+                      },
+                      "end": {
+                        "line": 50
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step15": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 56
+                      },
+                      "end": {
+                        "line": 56
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step16": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 57
+                      },
+                      "end": {
+                        "line": 57
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step17": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 58
+                      },
+                      "end": {
+                        "line": 58
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step2": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 15
+                      },
+                      "end": {
+                        "line": 15
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step3": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 16
+                      },
+                      "end": {
+                        "line": 16
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step4": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 17
+                      },
+                      "end": {
+                        "line": 17
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step5": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 19
+                      },
+                      "end": {
+                        "line": 19
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step6": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 20
+                      },
+                      "end": {
+                        "line": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step7": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 27
+                      },
+                      "end": {
+                        "line": 27
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 28
+                      },
+                      "end": {
+                        "line": 28
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 29
+                      },
+                      "end": {
+                        "line": 29
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 30
+                      },
+                      "end": {
+                        "line": 30
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 31
+                      },
+                      "end": {
+                        "line": 31
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 32
+                      },
+                      "end": {
+                        "line": 32
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step8": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 34
+                      },
+                      "end": {
+                        "line": 34
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 35
+                      },
+                      "end": {
+                        "line": 35
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 36
+                      },
+                      "end": {
+                        "line": 36
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 37
+                      },
+                      "end": {
+                        "line": 37
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 38
+                      },
+                      "end": {
+                        "line": 38
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 39
+                      },
+                      "end": {
+                        "line": 39
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step9": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 41
+                      },
+                      "end": {
+                        "line": 41
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "infos": [
+            {
+              "filename": "docker/Dockerfile",
+              "language": "Dockerfile",
+              "data": "IyBzeW50YXg9ZG9ja2VyL2RvY2tlcmZpbGUtdXBzdHJlYW06bWFzdGVyCkZST00gZGViaWFuOnN0YWJsZSBBUyBidWlsZAoKQVJHIEFSQ0gKClJVTiBhcHQtZ2V0IHVwZGF0ZSBcCiAgICAgICAgJiYgYXB0LWdldCBpbnN0YWxsIC15IGJ1aWxkLWVzc2VudGlhbCBjcm9zc2J1aWxkLWVzc2VudGlhbC0ke0FSQ0h9IHNxdWFzaGZzLXRvb2xzIGN1cmwgXAogICAgICAgICYmIGFwdC1nZXQgY2xlYW4KCkVOViBDQz0ke0FSQ0gvYXJtaGYvYXJtLWxpbnV4LWdudWVhYmloZi19CkVOViBDQz0ke0NDL2FybTY0L2FhcmNoNjQtbGludXgtZ251LX0KCkFSRyBCVVNZQk9YX1ZFUlNJT049MS4zNi4xCgpSVU4gbWtkaXIgL3dvcmsKV09SS0RJUiAvd29yawpSVU4gY3VybCAtc0xvIC0gImh0dHBzOi8vYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtCVVNZQk9YX1ZFUlNJT059LnRhci5iejIiIHwgdGFyIHh2agoKV09SS0RJUiBidXN5Ym94LSR7QlVTWUJPWF9WRVJTSU9OfQpSVU4gbWFrZSBhbGxub2NvbmZpZwoKRU5WIEVOQUJMRV9GRUFUVVJFUz0iTE9OR19PUFRTIFNIT1dfVVNBR0UgRkVBVFVSRV9WRVJCT1NFX1VTQUdFIEZFQVRVUkVfQ09NUFJFU1NfVVNBR0UgSU5TVEFMTF9BUFBMRVRfSEFSRExJTktTIExGUyBJTlNUQUxMX05PX1VTUiBcCiAgICAgICAgICAgICAgICBTViBTVkMgU1ZPSyBTVkxPR0QgUlVOU1YgUlVOU1ZESVIgQ0hQU1QgV0FUQ0hET0ciCgpFTlYgRElTQUJMRV9GRUFUVVJFUz0iSU5TVEFMTF9BUFBMRVRfU1lNTElOS1MiCgpSVU4gKCBcCiAgICAgICAgZm9yIEYgaW4gJHtFTkFCTEVfRkVBVFVSRVN9OyBcCiAgICAgICAgZG8gXAogICAgICAgICAgICAgICAgc2VkIC1pICJzL14uKiMgQ09ORklHXyR7Rn0gaXMgbm90IHNldC4qJC9DT05GSUdfJHtGfT15LyIgLmNvbmZpZyA7IFwKICAgICAgICBkb25lOyBcCikKClJVTiAoIFwKICAgICAgICBmb3IgRiBpbiAke0RJU0FCTEVfRkVBVFVSRVN9OyBcCiAgICAgICAgZG8gXAogICAgICAgICAgICAgICAgc2VkIC1pICJzL15DT05GSUdfJHtGfT15JC8jIENPTkZJR18ke0Z9IGlzIG5vdCBzZXQvIiAuY29uZmlnIDsgXAogICAgICAgIGRvbmU7IFwKKQoKUlVOIG1ha2Ugb2xkY29uZmlnClJVTiBtYWtlIENST1NTX0NPTVBJTEU9JENDIENDPSIke0NDfWdjYyAtT3MgLXBpcGUiIENYWD0iJHtDQ31nKysgLU9zIC1waXBlIC1mbm8tZXhjZXB0aW9ucyAtZm5vLXJ0dGkiIENPTkZJR19QUkVGSVg9ZXh0ZW5zaW9uL3Vzci9sb2NhbCBidXN5Ym94IGluc3RhbGwKUlVOIHJtIGV4dGVuc2lvbi91c3IvbG9jYWwvYmluL2J1c3lib3gKCkFSRyBUQ1o9YnVzeWJveC1zeXN0ZW0udGN6ClJVTiBta3NxdWFzaGZzIGV4dGVuc2lvbiAvJHtUQ1p9IC1hbGwtcm9vdCAtbm9hcHBlbmQKCldPUktESVIgLwpSVU4gdW5zcXVhc2hmcyAtbGMgJHtUQ1p9IHwgc2VkICdzfF5zcXVhc2hmcy1yb290L3x8JyA+ICR7VENafS5saXN0ClJVTiBtZDVzdW0gJHtUQ1p9ID4gJHtUQ1p9Lm1kNS50eHQKCkZST00gc2NyYXRjaCBBUyBleHBvcnQKCkFSRyBUQ1o9YnVzeWJveC1zeXN0ZW0udGN6CgpDT1BZIC0tZnJvbT1idWlsZCAvJHtUQ1p9IC8KQ09QWSAtLWZyb209YnVpbGQgLyR7VENafS5saXN0IC8KQ09QWSAtLWZyb209YnVpbGQgLyR7VENafS5tZDUudHh0IC8K",
+              "llbDefinition": [
+                {
+                  "id": "step0",
+                  "op": {
+                    "Op": {
+                      "source": {
+                        "identifier": "git://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+                        "attrs": {
+                          "git.authheadersecret": "GIT_AUTH_HEADER",
+                          "git.authtokensecret": "GIT_AUTH_TOKEN",
+                          "git.fullurl": "https://github.com/asssaf/picore-busybox-system.git"
+                        }
+                      }
+                    },
+                    "constraints": {}
+                  }
+                },
+                {
+                  "id": "step1",
+                  "op": {
+                    "Op": {}
+                  },
+                  "inputs": [
+                    "step0:0"
+                  ]
+                }
+              ],
+              "digestMapping": {
+                "sha256:46326576f559200ec06ece61f7b28844f0a3c00d6d6f51cf355a6230e3900664": "step1",
+                "sha256:b04d43cd46ca93fc2b9b4d658831f1a7c767d781f712f698068c0f0c995f2c78": "step0"
+              }
+            }
+          ]
+        },
+        "layers": {
+          "step0:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

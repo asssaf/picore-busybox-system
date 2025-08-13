@@ -1,0 +1,1891 @@
+{
+  "_type": "https://in-toto.io/Statement/v0.1",
+  "predicateType": "https://slsa.dev/provenance/v0.2",
+  "subject": [
+    {
+      "name": "busybox-system.tcz",
+      "digest": {
+        "sha256": "f3dc60bf049627d99a2e68ed33ab746bcf08311760c4dd90a9f7ee86d42c0258"
+      }
+    },
+    {
+      "name": "busybox-system.tcz.list",
+      "digest": {
+        "sha256": "c9e6fdf7f697f65df7216be700a3a96a7254d1b2d2a14139b3ba60ddc0b77894"
+      }
+    },
+    {
+      "name": "busybox-system.tcz.md5.txt",
+      "digest": {
+        "sha256": "3c8b39fe794c10106418e0961a8a9edfa5549ad7c0618cc728ba784b7008ed65"
+      }
+    }
+  ],
+  "predicate": {
+    "builder": {
+      "id": "https://github.com/asssaf/picore-busybox-system/actions/runs/16922014935/attempts/1"
+    },
+    "buildType": "https://mobyproject.org/buildkit@v1",
+    "materials": [
+      {
+        "uri": "pkg:docker/docker/dockerfile-upstream@master",
+        "digest": {
+          "sha256": "f5a082f18319877993d070adf5a206e14edc36245caa6955e61d71f95eedbeae"
+        }
+      },
+      {
+        "uri": "pkg:docker/debian@stable?platform=linux%2Famd64",
+        "digest": {
+          "sha256": "e9f62364e0cfd9269cbc422be431ac496e22c98c5401ddf03701638a280b398d"
+        }
+      },
+      {
+        "uri": "https://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+        "digest": {
+          "sha1": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f"
+        }
+      }
+    ],
+    "invocation": {
+      "configSource": {
+        "uri": "https://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+        "digest": {
+          "sha1": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f"
+        },
+        "entryPoint": "docker/Dockerfile"
+      },
+      "parameters": {
+        "frontend": "gateway.v0",
+        "args": {
+          "build-arg:ARCH": "arm64",
+          "build-arg:TCZ": "busybox-system.tcz",
+          "cmdline": "docker/dockerfile-upstream:master",
+          "label:org.opencontainers.image.created": "2025-08-12T22:06:14.378Z",
+          "label:org.opencontainers.image.description": "",
+          "label:org.opencontainers.image.licenses": "",
+          "label:org.opencontainers.image.revision": "b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+          "label:org.opencontainers.image.source": "https://github.com/asssaf/picore-busybox-system",
+          "label:org.opencontainers.image.title": "picore-busybox-system",
+          "label:org.opencontainers.image.url": "https://github.com/asssaf/picore-busybox-system",
+          "label:org.opencontainers.image.version": "latest",
+          "source": "docker/dockerfile-upstream:master",
+          "target": "export"
+        },
+        "secrets": [
+          {
+            "id": "GIT_AUTH_HEADER",
+            "optional": true
+          },
+          {
+            "id": "GIT_AUTH_TOKEN",
+            "optional": true
+          }
+        ]
+      },
+      "environment": {
+        "platform": "linux/amd64"
+      }
+    },
+    "buildConfig": {
+      "llbDefinition": [
+        {
+          "id": "step0",
+          "op": {
+            "Op": {
+              "source": {
+                "identifier": "docker-image://docker.io/library/debian:stable@sha256:e9f62364e0cfd9269cbc422be431ac496e22c98c5401ddf03701638a280b398d"
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          }
+        },
+        {
+          "id": "step1",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "apt-get update         \u0026\u0026 apt-get install -y build-essential crossbuild-essential-${ARCH} squashfs-tools curl         \u0026\u0026 apt-get clean"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step0:0"
+          ]
+        },
+        {
+          "id": "step2",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "mkdir /work"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step1:0"
+          ]
+        },
+        {
+          "id": "step3",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": -1,
+                    "output": 0,
+                    "Action": {
+                      "mkdir": {
+                        "path": "/work",
+                        "mode": 493,
+                        "makeParents": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step2:0"
+          ]
+        },
+        {
+          "id": "step4",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "curl -sLo - \"https://busybox.net/downloads/busybox-${BUSYBOX_VERSION}.tar.bz2\" | tar xvj"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/work",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step3:0"
+          ]
+        },
+        {
+          "id": "step5",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": -1,
+                    "output": 0,
+                    "Action": {
+                      "mkdir": {
+                        "path": "/work/busybox-1.36.1",
+                        "mode": 493,
+                        "makeParents": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step4:0"
+          ]
+        },
+        {
+          "id": "step6",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make allnoconfig"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step5:0"
+          ]
+        },
+        {
+          "id": "step7",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "(         for F in ${ENABLE_FEATURES};         do                 sed -i \"s/^.*# CONFIG_${F} is not set.*$/CONFIG_${F}=y/\" .config ;         done; )"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step6:0"
+          ]
+        },
+        {
+          "id": "step8",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "(         for F in ${DISABLE_FEATURES};         do                 sed -i \"s/^CONFIG_${F}=y$/# CONFIG_${F} is not set/\" .config ;         done; )"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step7:0"
+          ]
+        },
+        {
+          "id": "step9",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make oldconfig"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step8:0"
+          ]
+        },
+        {
+          "id": "step10",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "make CROSS_COMPILE=$CC CC=\"${CC}gcc -Os -pipe\" CXX=\"${CC}g++ -Os -pipe -fno-exceptions -fno-rtti\" CONFIG_PREFIX=extension/usr/local busybox install"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step9:0"
+          ]
+        },
+        {
+          "id": "step11",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "rm extension/usr/local/bin/busybox"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step10:0"
+          ]
+        },
+        {
+          "id": "step12",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "mksquashfs extension /${TCZ} -all-root -noappend"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/work/busybox-1.36.1",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step11:0"
+          ]
+        },
+        {
+          "id": "step13",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "unsquashfs -lc ${TCZ} | sed 's|^squashfs-root/||' \u003e ${TCZ}.list"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step12:0"
+          ]
+        },
+        {
+          "id": "step14",
+          "op": {
+            "Op": {
+              "exec": {
+                "meta": {
+                  "args": [
+                    "/bin/sh",
+                    "-c",
+                    "md5sum ${TCZ} \u003e ${TCZ}.md5.txt"
+                  ],
+                  "env": [
+                    "PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+                    "ARCH=arm64",
+                    "CC=aarch64-linux-gnu-",
+                    "BUSYBOX_VERSION=1.36.1",
+                    "ENABLE_FEATURES=LONG_OPTS SHOW_USAGE FEATURE_VERBOSE_USAGE FEATURE_COMPRESS_USAGE INSTALL_APPLET_HARDLINKS LFS INSTALL_NO_USR                 SV SVC SVOK SVLOGD RUNSV RUNSVDIR CHPST WATCHDOG",
+                    "DISABLE_FEATURES=INSTALL_APPLET_SYMLINKS",
+                    "TCZ=busybox-system.tcz"
+                  ],
+                  "cwd": "/",
+                  "removeMountStubsRecursive": true
+                },
+                "mounts": [
+                  {
+                    "dest": "/"
+                  }
+                ]
+              }
+            },
+            "platform": {
+              "Architecture": "amd64",
+              "OS": "linux"
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step13:0"
+          ]
+        },
+        {
+          "id": "step15",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": -1,
+                    "secondaryInput": 0,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step16",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": 1,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz.list",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step15:0",
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step17",
+          "op": {
+            "Op": {
+              "file": {
+                "actions": [
+                  {
+                    "input": 0,
+                    "secondaryInput": 1,
+                    "output": 0,
+                    "Action": {
+                      "copy": {
+                        "src": "/busybox-system.tcz.md5.txt",
+                        "dest": "/",
+                        "mode": -1,
+                        "followSymlink": true,
+                        "dirCopyContents": true,
+                        "createDestPath": true,
+                        "allowWildcard": true,
+                        "allowEmptyWildcard": true,
+                        "timestamp": -1
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            "constraints": {}
+          },
+          "inputs": [
+            "step16:0",
+            "step14:0"
+          ]
+        },
+        {
+          "id": "step18",
+          "op": {
+            "Op": {}
+          },
+          "inputs": [
+            "step17:0"
+          ]
+        }
+      ],
+      "digestMapping": {
+        "sha256:05da4916228850cc62c36a6c5800b8099a58d1eaceb3df3b615b4ccf345e6416": "step9",
+        "sha256:10c3c34da54c872ca3e420b57b4834e760f9fbed88b216bb9ea1fd7e2d957a44": "step18",
+        "sha256:10d6d7016fb880c17306620a95321665bd71e11c74024d889a7d6a673561e620": "step1",
+        "sha256:1189b990a0ec3f50359888e7fb75e772fea34715909e7297dee24d605171cecb": "step6",
+        "sha256:160dd95104fd8ae3cf96a946a19afd3727239289ff2bb6970ca724f2850c659b": "step12",
+        "sha256:1b1f37785861407784b60e1f2488e4acf4703fa9b1ddbf5bf747f3305ac761ec": "step15",
+        "sha256:26246316a505dfbfeb47e5fcdbe8cb89f8574a23c67f9b1910cf7b00988f2f98": "step16",
+        "sha256:43f61cfe116cc6cea376e5bc7ab323965580f63acdaa822f515ef539d8a30936": "step14",
+        "sha256:65f3e3f7b9e9c0997dce6cf42ff16681df3b8ebaab7323a52fa92034e89ca8e3": "step5",
+        "sha256:74effe6d0089bbd177acf0c15d9580a9e0c3e8e1de78651c6892615661c24e97": "step4",
+        "sha256:773db9c76943df7c903624852795a070fdaf4f76d5855a90575afeb5200eb679": "step10",
+        "sha256:95343f35815e24b76e50c2d9e13689ee5911ec30e38d97d3aa74224820d3fede": "step13",
+        "sha256:a6b271fbf1910575433019807c7ac8781b0c46aead35ccdd1efe8f3728837ada": "step2",
+        "sha256:aa0fa46b55854bca67da9a470478bee86a3a4f9fd920d3fa10b3df494f57b152": "step8",
+        "sha256:af8a09195d7cb9ee3f09e097509f47a8d7b4ee40e17595cb67a9a48fee668ca5": "step3",
+        "sha256:d298ba4edafe23efe46dcf048b54907461f2b0ae7f0eee91b7d829a220397637": "step7",
+        "sha256:dc7854ec1669eed3ae53c176065ba3595618f08d9cf2477ca5c6dfe32fc908bf": "step11",
+        "sha256:ed332cf2cee4b12abd54238a004ed806cb76be71885adef289472337082981b7": "step17",
+        "sha256:ee95f3b329ed80b9eefb23eb3f4896963f8bc60fce7969ad3a0d676995acdd61": "step0"
+      }
+    },
+    "metadata": {
+      "buildInvocationID": "dzeked1ll5ukk6il99l6hrtoe",
+      "buildStartedOn": "2025-08-12T22:06:15.284885478Z",
+      "buildFinishedOn": "2025-08-12T22:06:18.040114872Z",
+      "completeness": {
+        "parameters": true,
+        "environment": true,
+        "materials": true
+      },
+      "reproducible": false,
+      "https://mobyproject.org/buildkit@v1#metadata": {
+        "source": {
+          "locations": {
+            "step0": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 2
+                      },
+                      "end": {
+                        "line": 2
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step1": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 6
+                      },
+                      "end": {
+                        "line": 6
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 7
+                      },
+                      "end": {
+                        "line": 7
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 8
+                      },
+                      "end": {
+                        "line": 8
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step10": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 42
+                      },
+                      "end": {
+                        "line": 42
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step11": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 43
+                      },
+                      "end": {
+                        "line": 43
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step12": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 46
+                      },
+                      "end": {
+                        "line": 46
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step13": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 49
+                      },
+                      "end": {
+                        "line": 49
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step14": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 50
+                      },
+                      "end": {
+                        "line": 50
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step15": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 56
+                      },
+                      "end": {
+                        "line": 56
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step16": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 57
+                      },
+                      "end": {
+                        "line": 57
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step17": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 58
+                      },
+                      "end": {
+                        "line": 58
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step2": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 15
+                      },
+                      "end": {
+                        "line": 15
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step3": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 16
+                      },
+                      "end": {
+                        "line": 16
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step4": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 17
+                      },
+                      "end": {
+                        "line": 17
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step5": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 19
+                      },
+                      "end": {
+                        "line": 19
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step6": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 20
+                      },
+                      "end": {
+                        "line": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step7": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 27
+                      },
+                      "end": {
+                        "line": 27
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 28
+                      },
+                      "end": {
+                        "line": 28
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 29
+                      },
+                      "end": {
+                        "line": 29
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 30
+                      },
+                      "end": {
+                        "line": 30
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 31
+                      },
+                      "end": {
+                        "line": 31
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 32
+                      },
+                      "end": {
+                        "line": 32
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step8": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 34
+                      },
+                      "end": {
+                        "line": 34
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 35
+                      },
+                      "end": {
+                        "line": 35
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 36
+                      },
+                      "end": {
+                        "line": 36
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 37
+                      },
+                      "end": {
+                        "line": 37
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 38
+                      },
+                      "end": {
+                        "line": 38
+                      }
+                    },
+                    {
+                      "start": {
+                        "line": 39
+                      },
+                      "end": {
+                        "line": 39
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            "step9": {
+              "locations": [
+                {
+                  "ranges": [
+                    {
+                      "start": {
+                        "line": 41
+                      },
+                      "end": {
+                        "line": 41
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "infos": [
+            {
+              "filename": "docker/Dockerfile",
+              "language": "Dockerfile",
+              "data": "IyBzeW50YXg9ZG9ja2VyL2RvY2tlcmZpbGUtdXBzdHJlYW06bWFzdGVyCkZST00gZGViaWFuOnN0YWJsZSBBUyBidWlsZAoKQVJHIEFSQ0gKClJVTiBhcHQtZ2V0IHVwZGF0ZSBcCiAgICAgICAgJiYgYXB0LWdldCBpbnN0YWxsIC15IGJ1aWxkLWVzc2VudGlhbCBjcm9zc2J1aWxkLWVzc2VudGlhbC0ke0FSQ0h9IHNxdWFzaGZzLXRvb2xzIGN1cmwgXAogICAgICAgICYmIGFwdC1nZXQgY2xlYW4KCkVOViBDQz0ke0FSQ0gvYXJtaGYvYXJtLWxpbnV4LWdudWVhYmloZi19CkVOViBDQz0ke0NDL2FybTY0L2FhcmNoNjQtbGludXgtZ251LX0KCkFSRyBCVVNZQk9YX1ZFUlNJT049MS4zNi4xCgpSVU4gbWtkaXIgL3dvcmsKV09SS0RJUiAvd29yawpSVU4gY3VybCAtc0xvIC0gImh0dHBzOi8vYnVzeWJveC5uZXQvZG93bmxvYWRzL2J1c3lib3gtJHtCVVNZQk9YX1ZFUlNJT059LnRhci5iejIiIHwgdGFyIHh2agoKV09SS0RJUiBidXN5Ym94LSR7QlVTWUJPWF9WRVJTSU9OfQpSVU4gbWFrZSBhbGxub2NvbmZpZwoKRU5WIEVOQUJMRV9GRUFUVVJFUz0iTE9OR19PUFRTIFNIT1dfVVNBR0UgRkVBVFVSRV9WRVJCT1NFX1VTQUdFIEZFQVRVUkVfQ09NUFJFU1NfVVNBR0UgSU5TVEFMTF9BUFBMRVRfSEFSRExJTktTIExGUyBJTlNUQUxMX05PX1VTUiBcCiAgICAgICAgICAgICAgICBTViBTVkMgU1ZPSyBTVkxPR0QgUlVOU1YgUlVOU1ZESVIgQ0hQU1QgV0FUQ0hET0ciCgpFTlYgRElTQUJMRV9GRUFUVVJFUz0iSU5TVEFMTF9BUFBMRVRfU1lNTElOS1MiCgpSVU4gKCBcCiAgICAgICAgZm9yIEYgaW4gJHtFTkFCTEVfRkVBVFVSRVN9OyBcCiAgICAgICAgZG8gXAogICAgICAgICAgICAgICAgc2VkIC1pICJzL14uKiMgQ09ORklHXyR7Rn0gaXMgbm90IHNldC4qJC9DT05GSUdfJHtGfT15LyIgLmNvbmZpZyA7IFwKICAgICAgICBkb25lOyBcCikKClJVTiAoIFwKICAgICAgICBmb3IgRiBpbiAke0RJU0FCTEVfRkVBVFVSRVN9OyBcCiAgICAgICAgZG8gXAogICAgICAgICAgICAgICAgc2VkIC1pICJzL15DT05GSUdfJHtGfT15JC8jIENPTkZJR18ke0Z9IGlzIG5vdCBzZXQvIiAuY29uZmlnIDsgXAogICAgICAgIGRvbmU7IFwKKQoKUlVOIG1ha2Ugb2xkY29uZmlnClJVTiBtYWtlIENST1NTX0NPTVBJTEU9JENDIENDPSIke0NDfWdjYyAtT3MgLXBpcGUiIENYWD0iJHtDQ31nKysgLU9zIC1waXBlIC1mbm8tZXhjZXB0aW9ucyAtZm5vLXJ0dGkiIENPTkZJR19QUkVGSVg9ZXh0ZW5zaW9uL3Vzci9sb2NhbCBidXN5Ym94IGluc3RhbGwKUlVOIHJtIGV4dGVuc2lvbi91c3IvbG9jYWwvYmluL2J1c3lib3gKCkFSRyBUQ1o9YnVzeWJveC1zeXN0ZW0udGN6ClJVTiBta3NxdWFzaGZzIGV4dGVuc2lvbiAvJHtUQ1p9IC1hbGwtcm9vdCAtbm9hcHBlbmQKCldPUktESVIgLwpSVU4gdW5zcXVhc2hmcyAtbGMgJHtUQ1p9IHwgc2VkICdzfF5zcXVhc2hmcy1yb290L3x8JyA+ICR7VENafS5saXN0ClJVTiBtZDVzdW0gJHtUQ1p9ID4gJHtUQ1p9Lm1kNS50eHQKCkZST00gc2NyYXRjaCBBUyBleHBvcnQKCkFSRyBUQ1o9YnVzeWJveC1zeXN0ZW0udGN6CgpDT1BZIC0tZnJvbT1idWlsZCAvJHtUQ1p9IC8KQ09QWSAtLWZyb209YnVpbGQgLyR7VENafS5saXN0IC8KQ09QWSAtLWZyb209YnVpbGQgLyR7VENafS5tZDUudHh0IC8K",
+              "llbDefinition": [
+                {
+                  "id": "step0",
+                  "op": {
+                    "Op": {
+                      "source": {
+                        "identifier": "git://github.com/asssaf/picore-busybox-system.git#b66b88a9e4a1156d7bcd24ca4c4c89abe7fc413f",
+                        "attrs": {
+                          "git.authheadersecret": "GIT_AUTH_HEADER",
+                          "git.authtokensecret": "GIT_AUTH_TOKEN",
+                          "git.fullurl": "https://github.com/asssaf/picore-busybox-system.git"
+                        }
+                      }
+                    },
+                    "constraints": {}
+                  }
+                },
+                {
+                  "id": "step1",
+                  "op": {
+                    "Op": {}
+                  },
+                  "inputs": [
+                    "step0:0"
+                  ]
+                }
+              ],
+              "digestMapping": {
+                "sha256:46326576f559200ec06ece61f7b28844f0a3c00d6d6f51cf355a6230e3900664": "step1",
+                "sha256:b04d43cd46ca93fc2b9b4d658831f1a7c767d781f712f698068c0f0c995f2c78": "step0"
+              }
+            }
+          ]
+        },
+        "layers": {
+          "step10:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:73df073fa32952c0ee3a3aa6066148c70609764011f2cfb5b6bde5efb1d404c3",
+                "size": 678725
+              }
+            ]
+          ],
+          "step11:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:73df073fa32952c0ee3a3aa6066148c70609764011f2cfb5b6bde5efb1d404c3",
+                "size": 678725
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:93177c80a5cf898e9f6f260d244c50883ea93c31e3235c85bd92689d8b2731b0",
+                "size": 225
+              }
+            ]
+          ],
+          "step12:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:73df073fa32952c0ee3a3aa6066148c70609764011f2cfb5b6bde5efb1d404c3",
+                "size": 678725
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:93177c80a5cf898e9f6f260d244c50883ea93c31e3235c85bd92689d8b2731b0",
+                "size": 225
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              }
+            ]
+          ],
+          "step13:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:73df073fa32952c0ee3a3aa6066148c70609764011f2cfb5b6bde5efb1d404c3",
+                "size": 678725
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:93177c80a5cf898e9f6f260d244c50883ea93c31e3235c85bd92689d8b2731b0",
+                "size": 225
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:d7748a2cd52cb42781457ff4754fe4eac3c64e3447bedd507b9a500d0adf47bd",
+                "size": 178
+              }
+            ]
+          ],
+          "step14:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:73df073fa32952c0ee3a3aa6066148c70609764011f2cfb5b6bde5efb1d404c3",
+                "size": 678725
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:93177c80a5cf898e9f6f260d244c50883ea93c31e3235c85bd92689d8b2731b0",
+                "size": 225
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:d7748a2cd52cb42781457ff4754fe4eac3c64e3447bedd507b9a500d0adf47bd",
+                "size": 178
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:a882e2f02e9ea06b075166e2673068fb167b0e3b63026be7fb1bcb8149389005",
+                "size": 151
+              }
+            ]
+          ],
+          "step15:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              }
+            ]
+          ],
+          "step16:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:d7748a2cd52cb42781457ff4754fe4eac3c64e3447bedd507b9a500d0adf47bd",
+                "size": 178
+              }
+            ]
+          ],
+          "step17:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:fe98f32a01a3b6d9b779b1d3a76f42d4f32bd29e5085da9639468e6027448d08",
+                "size": 52633
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:d7748a2cd52cb42781457ff4754fe4eac3c64e3447bedd507b9a500d0adf47bd",
+                "size": 178
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:a882e2f02e9ea06b075166e2673068fb167b0e3b63026be7fb1bcb8149389005",
+                "size": 151
+              }
+            ]
+          ],
+          "step1:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              }
+            ]
+          ],
+          "step2:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              }
+            ]
+          ],
+          "step3:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              }
+            ]
+          ],
+          "step4:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              }
+            ]
+          ],
+          "step5:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              }
+            ]
+          ],
+          "step6:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              }
+            ]
+          ],
+          "step7:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              }
+            ]
+          ],
+          "step8:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              }
+            ]
+          ],
+          "step9:0": [
+            [
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:da0b5f91c7fa69571d66334a393ef7af7d8835b9b2063553bf1d6036a472cf64",
+                "size": 49278282
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c0f88113cfc2f7d5f87eacf03acbf2fd5e4ead777e2055c07ba9f483c889a206",
+                "size": 244415718
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:cd272dd27a37f2199a418fceee4858172f64398deb52e6559a5818d8a5beeed4",
+                "size": 94
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:e264098840c4f0230252c74971516da2568a592a52be1e0b8cae990c1dd7f496",
+                "size": 3124198
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+                "size": 32
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:23df4704d85a12ae9d9a5494fb08d922589e90646a09a451c408862696e6423f",
+                "size": 335309
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:b5e474d3713fb64314562270229934d6e3e2639c0e074e222fae6e3189b9aa7a",
+                "size": 7332
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:0048db94ed6eeccd3db28567a2ac16dc86647ee5e5be7d734eddb27da36ec3f1",
+                "size": 7327
+              },
+              {
+                "mediaType": "application/vnd.oci.image.layer.v1.tar+gzip",
+                "digest": "sha256:c8b167ddb3ed4358610879d91fe9722cb340bcb44fff3499e24a52d842a06d21",
+                "size": 34652
+              }
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

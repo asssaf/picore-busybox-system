@@ -1,0 +1,9 @@
+usr/local/bin/chpst
+usr/local/bin/runsv
+usr/local/bin/runsvdir
+usr/local/bin/sh
+usr/local/bin/sv
+usr/local/bin/svc
+usr/local/bin/svok
+usr/local/sbin/svlogd
+usr/local/sbin/watchdog
